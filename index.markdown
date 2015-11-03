@@ -1,5 +1,5 @@
 ---
-layout: docs
+title: This is a test
 ---
 
 # Under Construction
