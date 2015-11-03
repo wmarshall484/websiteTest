@@ -5,7 +5,7 @@ title: This is a test
 hello
 =====
 
-# Under Construction
+# Under Constructio
 
 # Streams InfoCenter
 [Streams 4.0.1 Infocenter](http://www-01.ibm.com/support/knowledgecenter/#!/SSCRJU_4.0.1/com.ibm.streams.welcome.doc/doc/kc-homepage.html)
