@@ -42,10 +42,10 @@ because the histogram of temperature readings persists in between tuples being s
 			}
 ```
 Finally, we can print the histogram to output as follows:
-	* tempReadings.print()
+* tempReadings.print()
 	
 For now, submit your application as a standalone application:
-	* StreamsContextFactory.getStreamsContext("EMBEDDED").submit(topology).get();
+* StreamsContextFactory.getStreamsContext("EMBEDDED").submit(topology).get();
 
 Embedded runs the entire app in a single JVM. For a further explanation of the various submission contexts, refer to [link](google.com)
 When we run this as a Java Application, we get
