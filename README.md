@@ -1,38 +1,38 @@
 # Java Application API: First Application
 
 The Java Application API enables developers to write IBM Streams Applications entirely in Java, requiring no knowledge of SPL.
-	* Java code can be used to modify and generate data
-	* Java objects can be passed as tuples of a strem
+* Java code can be used to modify and generate data
+* Java objects can be passed as tuples of a strem
 
 Open Source (link to project)[http://ibmstreams.github.io/streamsx.topology/]
 
 The typical pattern for a JAA Streaming Application is source -> transform -> sink. Our application will
-	* Generate a dataset modeling readings from a temperature sensor.
-	* Filter it such that it's between a min and a max
-	* Create a historgram of the sensor's values
-	* Print the histogram to standard output.
+* Generate a dataset modeling readings from a temperature sensor.
+* Filter it such that it's between a min and a max
+* Create a historgram of the sensor's values
+* Print the histogram to standard output.
 	
 ## Building the Application
 
 Since the JAA is pure Java, use the benefits of the Java ecosystem (Eclipse, code completion, etc...).
 
 Defining a source is easy!
-	* Create a topology object, which keeps track of the information about the state of your application.
-	* Invoke the topology.endlessSource() method to repeatedly grab a random number from a gaussian distribution (the temperature).
+* Create a topology object, which keeps track of the information about the state of your application.
+* Invoke the topology.endlessSource() method to repeatedly grab a random number from a gaussian distribution (the temperature).
 
 Sources, transformations and sinks all use the Java Functional interface to allow developers to supply their own code. Developers may benefit from using 	
 Java 8 lambdas, which are a more concise way of creating Java Functions.
 
 Using Java 8 lambdas, defining a filter is only one line of code:
-	* stream.filter( temperature -> temperature > -3.0 && temperature < 3.0)
+* stream.filter( temperature -> temperature > -3.0 && temperature < 3.0)
 
 Next, creating a histogram of the filtered temperatures demonstrates how we can make a stateful operator. In this case, the operation is termed 'stateful'
-because the histogram of temperature readings persists in between tuples being sent on the stream. Here's how to do it:
+because the histogram of temperature readings persists in between tuples being sent on the stream. Here's how to do it
 
-	* Invoke filtered_temps.transform()
-	* Supply a Java Function of the following form:
+* Invoke filtered_temps.transform()
+* Supply a Java Function of the following form:
 	
-	``` 
+``` 
 		new Function(){
 			List<Integer> histogram = new List<>(10);
 			List<String> apply(String temp){
@@ -40,7 +40,7 @@ because the histogram of temperature readings persists in between tuples being s
 				histogram.get(index) += 1;
 				return histogram;
 			}
-	```
+```
 Finally, we can print the histogram to output as follows:
 	* tempReadings.print()
 	
