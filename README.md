@@ -49,10 +49,11 @@ For now, submit your application as a standalone application:
 
 Embedded runs the entire app in a single JVM. For a further explanation of the various submission contexts, refer to [link](google.com)
 When we run this as a Java Application, we get
+```
 [0, 1, 4, 2, 7, 10, 12, 10, 4, 2, 1, 0]
 [0, 1, 4, 2, 7, 10, 12, 10, 5, 2, 1, 0]
 [0, 1, 4, 2, 7, 11, 12, 10, 5, 2, 1, 0]
 [0, 1, 4, 2, 8, 11, 12, 10, 5, 2, 1, 0]
-
+```
 Note how the histogram is updated each time. For a more in-depth example of how to parallelize your datastream to remove bottlenecks, refer to the tutorial at [link](google.com).
 Data sources can be read from more IoT friendly sources! For an example of reading from Kafka, using the build-in kafka support, refer to [kafka sample](google.com).
