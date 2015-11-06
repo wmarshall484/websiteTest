@@ -4,7 +4,7 @@ The Java Application API enables developers to write IBM Streams Applications en
 * Java code can be used to modify and generate data
 * Java objects can be passed as tuples of a strem
 
-Open Source (link to project)[http://ibmstreams.github.io/streamsx.topology/]
+Open Source [link to project](http://ibmstreams.github.io/streamsx.topology/)
 
 The typical pattern for a JAA Streaming Application is source -> transform -> sink. Our application will
 * Generate a dataset modeling readings from a temperature sensor.
@@ -50,8 +50,11 @@ For now, submit your application as a standalone application:
 Embedded runs the entire app in a single JVM. For a further explanation of the various submission contexts, refer to [link](google.com)
 When we run this as a Java Application, we get:
 [0, 1, 4, 2, 7, 10, 12, 10, 4, 2, 1, 0]
+
 [0, 1, 4, 2, 7, 10, 12, 10, 5, 2, 1, 0]
+
 [0, 1, 4, 2, 7, 11, 12, 10, 5, 2, 1, 0]
+
 [0, 1, 4, 2, 8, 11, 12, 10, 5, 2, 1, 0]
 
 Note how the histogram is updated each time. For a more in-depth example of how to parallelize your datastream to remove bottlenecks, refer to the tutorial at [link](google.com).
