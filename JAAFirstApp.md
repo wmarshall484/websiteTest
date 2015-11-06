@@ -57,3 +57,6 @@ When we run this as a Java Application, we get
 ```
 Note how the histogram is updated each time. For a more in-depth example of how to parallelize your datastream to remove bottlenecks, refer to the tutorial at [link](google.com).
 Data sources can be read from more IoT friendly sources! For an example of reading from Kafka, using the build-in kafka support, refer to [kafka sample](google.com).
+
+# Whole Application
+(contents of entire application here)
