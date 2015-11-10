@@ -166,15 +166,6 @@ This is an important point: the state of the operator does *not* reset between t
 
 Although in this case our state is a LinkedList with the ultimate goal of calculating a moving average, the following are some examples of state used in sources, sinks, and transformations.
 
-|Operation	| State	| Goal	|
-| -------	|:------:	| ------ :	|
-| Source	| File Handle	| Reading lines from a file to send as tuples	|
-| Source	| Socket	| Listening on a TCP socket for data to send as tuples	|
-| Transform | HashMap | A HashMap can be used as state to make a histogram of the most commonly seen tuples|
-| Transform | Set | A set can be used as state to keep track of all unique tuples on a TStream |
-| Sink | File Handle | Similar to the source, except the file handle is used to write tuples to a file |
-| Sink | Socket | Similar to the source, except the Socket is used to write tuples to a TCP stream |
-
 | Operation        | State           | Goal  |
 | ------------- |:-------------:| -----:|
 | Source	| File Handle	| Reading lines from a file to send as tuples	|
