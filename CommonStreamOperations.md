@@ -174,7 +174,7 @@ Although in this case our state is a LinkedList with the ultimate goal of calcul
 | Sink | File Handle | Similar to the source, except the file handle is used to write tuples to a file |
 | Sink | Socket | Similar to the source, except the Socket is used to write tuples to a TCP stream |
 
-| Tables        | Are           | Cool  |
+| Operation        | State           | Goal  |
 | ------------- |:-------------:| -----:|
 | col 3 is      | right-aligned | $1600 |
 | col 2 is      | centered      |   $12 |
