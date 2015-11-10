@@ -177,9 +177,12 @@ Although in this case our state is a LinkedList with the ultimate goal of calcul
 
 | Operation        | State           | Goal  |
 | ------------- |:-------------:| -----:|
-| Source	| File Handle	| Reading lines from a file to send as tuples |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
+| Source	| File Handle	| Reading lines from a file to send as tuples	|
+| Source	| Socket	| Listening on a TCP socket for data to send as tuples	|
+| Transform | HashMap | A HashMap can be used as state to make a histogram of the most commonly seen tuples|
+| Transform | Set | A set can be used as state to keep track of all unique tuples on a TStream |
+| Sink | File Handle | Similar to the source, except the file handle is used to write tuples to a file |
+| Sink | Socket | Similar to the source, except the Socket is used to write tuples to a TCP stream |
 
 ## Sink
 The Sink method takes tuples from a stream, but does not return a stream as output. It is invoked on a TStream when the tuples themselves are output to the system. The output can take the form of a file, a log, a TCP connection, HDFS, Kafka, or anything that the user can define -- since operations such as sink can be stateful, the user can provide any handle that is required.
