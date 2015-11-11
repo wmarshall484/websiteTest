@@ -1,6 +1,28 @@
 # Kafka sample
 
-Code in its entirety. See if it can be simplified; too much going on.
+**Code in its entirety. See if it can be simplified; too much going on.**
+
+Demonstrate integrating with the Apache Kafka messaging system http://kafka.apache.org. 
+
+Connectors are used to create a bridge between topology streams and a Kafka cluster: 
+
+*KafkaConsumer - subscribe to Kafka topics and create streams of messages. 
+*KafkaProducer - publish streams of messages to Kafka topics. 
+The sample publishes some messages to a Kafka topic. It also subscribes to the topic and reports the messages received. The messages received may include messages from prior runs of the sample. 
+
+The sample requires a running Kafka cluster with the following characteristics: 
+
+*the kafka topic *kafkaSampleTopic* has been created. e.g.
+```${KAFKA_HOME}/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic kafkaSampleTopic} ```
+*the Kafka cluster's zookeeper connection is localhost:2181 
+*the Kafka cluster's brokers addresses is localhost:9092 
+Required IBM Streams environment variables: 
+
+STREAMS_INSTALL - the Streams installation directory 
+STREAMS_DOMAIN_ID - the Streams domain to use for context DISTRIBUTED 
+STREAMS_INSTANCE_ID - the Streams instance to use for context DISTRIBUTED 
+See the Apache Kafka link above for information about setting up a Kafka cluster and creating a topic. 
+
 ``` Java
 /*
 # Licensed Materials - Property of IBM
@@ -38,64 +60,6 @@ import com.ibm.streamsx.topology.messaging.kafka.KafkaConsumer;
 import com.ibm.streamsx.topology.messaging.kafka.KafkaProducer;
 import com.ibm.streamsx.topology.tuple.Message;
 import com.ibm.streamsx.topology.tuple.SimpleMessage;
-
-
-/**
- * Demonstrate integrating with the Apache Kafka messaging system
- * <a href="http://kafka.apache.org">http://kafka.apache.org</a>.
- * <p>
- * Connectors are used to create a bridge between topology streams
- * and a Kafka cluster:
- * <ul>
- * <li>{@link com.ibm.streamsx.topology.messaging.kafka.KafkaConsumer KafkaConsumer} - subscribe to Kafka topics and create streams of messages.</li>
- * <li>{@link com.ibm.streamsx.topology.messaging.kafka.KafkaProducer KafkaProducer} - publish streams of messages to Kafka topics.</li>
- * </ul>
- * <p>
- * The sample publishes some messages to a Kafka topic.  
- * It also subscribes to the topic and reports the messages received.
- * The messages received may include messages from prior runs of the sample.
- * <p>
- * The sample requires a running Kafka cluster with the following
- * characteristics:
- * <ul>
- * <li>the kafka topic (@code kafkaSampleTopic} has been created.
- * e.g.<br>
- * {@code ${KAFKA_HOME}/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic kafkaSampleTopic}
- * </li>
- * <li>the Kafka cluster's zookeeper connection is {@code localhost:2181}</li>
- * <li>the Kafka cluster's brokers addresses is {@code localhost:9092}</li>
- * </ul>
- * <p>
- * Required IBM Streams environment variables:
- * <ul>
- * <li>STREAMS_INSTALL - the Streams installation directory</li>
- * <li>STREAMS_DOMAIN_ID - the Streams domain to use for context {@code DISTRIBUTED}
- * <li>STREAMS_INSTANCE_ID - the Streams instance to use for context {@code DISTRIBUTED}
- * </ul>
- * <p>
- * See the Apache Kafka link above for information about setting up a Kafka
- * cluster and creating a topic.
- * <p>
- * This may be executed from the {@code samples/java/functional} directory as:
- * <UL>
- * <LI>{@code ant run.kafka.distributed} - Using Apache Ant, this will run in distributed mode.</li>
- * <LI>{@code ant run.kafka} - Using Apache Ant, this will run in standalone mode.</li>
- * <LI>
- * {@code java -cp functionalsamples.jar:../../../com.ibm.streamsx.topology/lib/com.ibm.streamsx.topology.jar:$STREAMS_INSTALL/lib/com.ibm.streams.operator.samples.jar
- *  kafka.KafkaSample CONTEXT_TYPE
- * } - Run directly from the command line.
- * </LI>
- * <i>CONTEXT_TYPE</i> is one of:
- * <UL>
- * <LI>{@code DISTRIBUTED} - Run as an IBM Streams distributed application.</LI>
- * <LI>{@code STANDALONE} - Run as an IBM Streams standalone application.</LI>
- * <LI>{@code BUNDLE} - Create an IBM Streams application bundle.</LI>
- * <LI>{@code TOOLKIT} - Create an IBM Streams application toolkit.</LI>
- * </UL>
- * <LI>
- * An application execution within your IDE once you set the class path to include the correct jars.</LI>
- * </UL>
- */
 public class KafkaSample {
     private static final String ZOOKEEPER_CONNECT = "localhost:2181";    
     private static final String KAFKA_BOOTSTRAP_SERVER_LIST = "localhost:9092";
