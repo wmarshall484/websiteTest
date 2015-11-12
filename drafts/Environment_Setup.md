@@ -40,7 +40,7 @@ If you've followed the previous steps and are ready to start writing code in Ecl
 If you haven't yet linked Eclipse/Streams Studio with IBM Streams, ensure the following jar files are part of the classpath:
 * <streamsx.topology install path>/com.ibm.streamsx.topology/lib/com.ibm.streamsx.topology.jar
 * $STREAMS_INSTALL/lib/com.ibm.streams.operator.samples.jar
-* 
+
 This completes the installation of the streamsx.topology project. The steps above are specific to installing the Java Application API libraries in Eclipse or Streams Studio (or any Java IDE, really).
 
 You are now ready to go!
