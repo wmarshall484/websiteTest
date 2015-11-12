@@ -41,18 +41,35 @@ The *endlessSource* method will repeatedly call the Function's overridden get() 
 
 ## First Application: The TStream
 
-The *endlessSource* method produces a TStream, which is arguably the most important Java class in the Java Application API. **A TStream represents a potentially infinite flow of tuples in your application**. Tuples flow one at a time over a TStream, and are processed by subsequent data **operations**. Since an application may run forever, there is no upper limit to the number of tuples that may flow over a TStream. One of the strengths of the Java Application API is that tuples can be any Java Object, so long as it is serializable. As such, a TStream is parameterized to a Java type as seen in the preceeding line:
+The *endlessSource* method produces a TStream, which is arguably the most important Java class in the Java Application API. **A TStream represents a potentially infinite flow of tuples in your application**. Since an application may run forever, there is no upper limit to the number of tuples that may flow over a TStream. Tuples flow one at a time over a TStream, and are processed by subsequent data **operations**. While we do not define any data operations in this example (such as filtering or transforming the data on a TStream), data operations are covered in the [common streams operations](CommonStreamOperations) tutorial.
+
+One of the strengths of the Java Application API is that a tuple can be any Java Object, so long as it is serializable. As such, a TStream is parameterized to a Java type as was seen in the preceeding line:
 ```
 TStream<Double> readings = ...;
 ```
 In this case, it is parameterized to a Double.
 
+## First Application: Printing to Output
+
 Now, in true "Hello World" fashion, after obtaining the data we simply print it to standard output. 
 ``` Java
 readings.print();
 ```
-Since each tuple is a Java object, invoking TStream's print() method calls the toString() method on each tuple, and prints the results to output using System.out.println().
+Since each tuple is a Java object, invoking TStream's print() method calls the toString() method on each tuple, and prints the results to output using System.out.println(). Although TStream's print() method is useful in its convenience, there are likely cases where the application will need to output to a file or Kafka. These cases are covered in the [Kafka](Kafka) and [common streams operations](CommonStreamOperations) tutorials.
 
+## First Application: Submitting and Running The Application
+After the application has been defined, it can be run by acquiring a *context* from the StreamsContextFactory, and invoking its submit() method while passing the topology object as a parameter:
+``` Java 
+StreamsContextFactory.getEmbedded().submit(topology);
+```
+The getEmbedded() method returns an EMBEDDED submission context, which runs the application in a single JVM on a single host. There are three primary submission contexts, each of which runs the application in a different manner.
+
+* EMBEDDED - Runs the application in embedded mode. This is a simulated Java environment for running your Streams application.
+* DISTRIBUTED - Runs the application in distributed mode. When an application is submitted with this context, a Streams Application Bundle (.sab file) is produced. The .sab file contains all of the application's logic and third-party dependencies, and is submitted to an IBM Streams instance automatically.
+* STANDALONE - Runs the application in standalone mode. When running in this mode, the application also produces a Streams Applicaition Bundle (.sab file), but rather than submitting it to a cluster, the bundle is instead executable. The bundle will run within a single process, and may be terminated with ctrl-C interrupts.
+
+# Entire Application
+The application, in its entirety, is as follows:
 ``` Java 
 import java.util.Arrays;
 import java.util.Random;
@@ -80,20 +97,3 @@ public class TemperatureTest {
     }
 }
 ```
-
-### Create the Topology object
-The topology object contains all the information about the information flow and processing of your topology. For the purposes of this example, it enables developers to define their data sources.
-Different kinds of data sources:
-* User supplied (i.e, topology.strings("a", "b", "c");
-* Kafka (link to kafka example)
-* HDFS (link to hdfs example that Kris Hildrum created)
-
-In our case, we simply invoke the topology.source() method which takes a Java Supplier object to return the correct data item upon each invocation. 
-
-### Printing to output
-Printing to standard output is as easy as invoking the TStream.sink() method which call .toString() on each of the Java Objects in the stream. 
-
-### Submitting the application
-* EMBEDDED - Run the application in embedded mode. This is a simulated Java environment for running your Streams application.
-* DISTRIBUTED - Run the application in distributed mode. When an application is submitted with this context, a Streams Application Bundle (.sab file) is produced. The .sab file contains all of the application's logic and third-party dependencies, and is submitted to a Streams instance automatically.
-* STANDALONE - Run the application in stand alone mode. When running in this mode, the application also produces a Streams Applicaition Bundle (.sab file), but rather than submitting it to a cluster, the bundle is instead executable. The bundle will run within its own process, and may be terminated with ctrl-C interrupts.
