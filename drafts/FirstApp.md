@@ -37,11 +37,18 @@ TStream<Double> readings = topology.endlessSource(new Supplier<Double>(){
     }
 });
 ```
-The *endlessSource* method will repeatedly call the Function's overridden get() method, and return a new random temperature reading each time. Although in this case we are obtaining our data by calling ```random.nextGaussian()```, in principle this could be substituted for any data source such as reading from a Kafka cluster or file. This will be shown in subsequent tutorials. 
+The *endlessSource* method will repeatedly call the Function's overridden get() method, and return a new random temperature reading each time. Although in this case we are obtaining our data by calling ```random.nextGaussian()```, in principle this could be substituted for any data source such as reading from a Kafka cluster or file. This will be shown in subsequent tutorials.
+
+As a side note, the API is compatible with Java 8 so this data source could be written more concisely using a lambda expression:
+``` Java
+TStream<Double> readings = topology.endlessSource(() -> random.nextGaussian());
+```
 
 ## First Application: The TStream
 
-The *endlessSource* method produces a TStream, which is arguably the most important Java class in the Java Application API. **A TStream represents a potentially infinite flow of tuples in your application**. Since an application may run forever, there is no upper limit to the number of tuples that may flow over a TStream. Tuples flow one at a time over a TStream, and are processed by subsequent data **operations**. While we do not define any data operations in this example (such as filtering or transforming the data on a TStream), data operations are covered in the [common streams operations](CommonStreamOperations) tutorial.
+The *endlessSource* method produces a TStream, which is arguably the most important Java class in the Java Application API. 
+
+**A TStream represents a potentially infinite flow of tuples in your application**. Since an application may run forever, there is no upper limit to the number of tuples that may flow over a TStream. Tuples flow one at a time over a TStream, and are processed by subsequent data **operations**. While we do not define any data operations in this example (such as filtering or transforming the data on a TStream), data operations are covered in the [common streams operations](CommonStreamOperations) tutorial.
 
 One of the strengths of the Java Application API is that a tuple can be any Java Object, so long as it is serializable. As such, a TStream is parameterized to a Java type as was seen in the preceeding line:
 ```
