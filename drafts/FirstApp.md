@@ -1,4 +1,4 @@
-# Introduction
+# The Java Application API
 The Java Application API allows you to write programs for Streaming data exclusively in Java—no SPL! You can run the programs as Java programs, you can run them as standalone Streams applications, or you can run them as distributed Streams applications. If you need help getting your environment set up, visit please visit [the Java Application API set-up guide](Environment_Setup).
 
 The primary goals of the Java Application API are to enable the developer to:
@@ -6,7 +6,7 @@ The primary goals of the Java Application API are to enable the developer to:
 * Pass java objects as tuples on a streaming
 * Define how data is processed in a modular, scalable, and stateful manner.
 
-Each of these points is covered in further detail the introductory tutorial below, where we create a sample application that processes sample temperature readings from a device. If you're viewing this page, it's likely that you haven't worked with the Java Application API before, or possibly streaming applications in general. In this document, we cover a sample application and discuss at a high level the general principles behind streaming application development. 
+Each of these points is covered in further detail the tutorials on this site, and below where we create a sample application that processes sample temperature readings from a device. If you're viewing this page, it's likely that you haven't worked with the Java Application API before, or possibly streaming applications in general. In this document, we cover a sample application and discuss at a high level the general principles behind streaming application development. 
 
 Lastly, the Java Application API is fully compatible with IBM Streams version 4.0.0 and greater. The API is open source, and is available for download from our [github page](https://github.com/IBMStreams/streamsx.topology)
 
