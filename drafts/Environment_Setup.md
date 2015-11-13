@@ -2,7 +2,7 @@
 
 There are three primary ways to get started with the API. If you are trying the API for the first time, the Streams Quick Start Edition VM is likely the fastest way to start working with the tutorials on this page, so download it at the following link to get started: [Streams Quick Start Edition VM](http://www-01.ibm.com/software/data/infosphere/stream-computing/trials.html)
 
-The Streams Quick Start Edition VM contains a ready-to-go release of IBM InfoSphere Streams. Additionally, the Quick Start VM comes bundled with IBM Streams Studio, which provides an intuitive, visual representation of your streaming application. Once  you've downloaded it, start the VM, open a console and type:
+The Streams Quick Start Edition VM contains a ready-to-go release of IBM  Streams. Additionally, the Quick Start VM comes bundled with IBM Streams Studio, which provides an intuitive, visual representation of your streaming application. Once  you've downloaded it, start the VM, open a console and type:
 ``` bash
 streamtool startinstance
 ```
