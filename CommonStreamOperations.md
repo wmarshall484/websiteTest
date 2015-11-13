@@ -84,7 +84,7 @@ quix
 quiz
 ...
 ```
-As you can see, invoking .transform() allows for the modification of tuples. Yet what if your application seeks to change the typle? For the previous example, both the inputs and outputs of the transform function were strings. In the next section it will be demonstrated how transform() can change tuple types entirely.
+As you can see, invoking .transform() allows for the modification of tuples. Yet what if your application seeks to change the type? For the previous example, both the inputs and outputs of the transform function were strings. In the next section it will be demonstrated how transform() can change tuple types entirely.
 
 ### Transform: Changing The Tuple Type
 The transform method does not require that the input tuple type is the same as the output tuple type. In fact, one of the strengths of the Java Application API is that the tuples on a TStream can be used as parameters when creating tuples to pass on the output TStream. As an example of this, let's suppose that we have a TStream of Java Strings, each corresponding to an integer:
