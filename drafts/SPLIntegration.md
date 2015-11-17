@@ -26,7 +26,7 @@ $ tree
 |   |--  ./myTk/toolkit.xml
 ```
 
-In the *myTk* toolkit, there is one package named *myPackageName*, and one operator named *myOperatorName*. As such, when the toolkit is included into the application, the full path of the operator will be **myPackageName::myOperatorName**. The *myOperatorName* operator itself is very simple --
+In the 'myTk' toolkit, there is one package named 'myPackageName', and one operator named 'myOperatorName'. As such, when the toolkit is included into the application, the full path of the operator will be **myPackageName::myOperatorName**. The 'myOperatorName' operator itself is very simple --
 
 myOperatorName_h.cgt:
 ``` c++
