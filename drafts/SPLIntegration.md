@@ -26,7 +26,9 @@ $ tree
 |   |--  ./myTk/toolkit.xml
 ```
 
-In the *myTk* toolkit, there is one package named *myPackageName*, and one operator named *myOperatorName*. As such, when the toolkit is included into the application, the full path of the operator will be **myPackageName::myOperatorName**. The *myOperatorName* operator itself is very simple:
+In the *myTk* toolkit, there is one package named *myPackageName*, and one operator named *myOperatorName*. As such, when the toolkit is included into the application, the full path of the operator will be **myPackageName::myOperatorName**. The *myOperatorName* operator itself is very simple --
+
+myOperatorName_h.cgt:
 ``` c++
 #pragma SPL_NON_GENERIC_OPERATOR_HEADER_PROLOGUE
 
@@ -47,4 +49,33 @@ private:
 }; 
 
 #pragma SPL_NON_GENERIC_OPERATOR_HEADER_EPILOGUE
+```
+myOperatorName_cpp.cgt:
+``` c++
+// Constructor
+MY_OPERATOR::MY_OPERATOR()
+{
+}
+
+// Tuple processing for mutating ports 
+void MY_OPERATOR::process(Tuple & tuple, uint32_t port)
+{
+    IPort0Type & ip = static_cast<IPort0Type &>(tuple);
+
+    SPL::rstring rstring_value = ip.get_rstring_attr_name();
+    rstring_value += " appended!";
+
+
+    OPort0Type op;
+    op.set_rstring_attr_name(rstring_value);
+
+    submit(op, 0);
+}
+
+// Punctuation processing
+void MY_OPERATOR::process(Punctuation const & punct, uint32_t port)
+{
+}
+
+#pragma SPL_NON_GENERIC_OPERATOR_IMPLEMENTATION_EPILOGUE
 ```
