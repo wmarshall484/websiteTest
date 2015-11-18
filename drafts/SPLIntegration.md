@@ -41,7 +41,7 @@ It's important to note that every primitive operator is strongly typed with resp
 ```
 tuple<rstring attribute_name>
 ```
-Which makes sense, since 'appendOperator' both takes and produces an rstring. A hypothetical operator that takes an rstring and an integer would look like:
+Which makes sense, since 'appendOperator' both takes and produces an rstring. A hypothetical operator that takes and emits an rstring and an integer would look like:
 ```
 tuple<rstring first_attribute_name, uint32 second_attribute_name>
 ```
@@ -72,7 +72,7 @@ The first thing we do is import the toolkit by using the *addToolkit* utility me
 SPL.addToolkit(topology, new File("/home/streamsadmin/myTk"));
 ```
 
-Then, we convert the TStream of Strings to an SPLStream of SPL tuples -- each tuple corresponding to the stream schema of the operator:
+Then, we convert the TStream of Strings to an SPLStream of SPL tuples -- each tuple conforming to the stream schema of the operator:
 ``` Java
 StreamSchema rstringSchema = Type.Factory.getStreamSchema("tuple<rstring rstring_attr_name>");
 SPLStream splInputStream = SPLStreams.convertStream(strings, new BiFunction<String, OutputTuple, OutputTuple>(){
@@ -125,7 +125,7 @@ When the application is run, it correctly produces the following output
 
 # To reiterate
  
- When using a primitive operator, the general structure of your application be the following:
+ When using a primitive operator, the general structure of your application is the following:
  
  1) Convert form a TStream to an SPLStream
  
