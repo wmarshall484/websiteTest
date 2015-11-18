@@ -126,8 +126,11 @@ When the application is run, it correctly produces the following output
 # To reiterate
  
  When using a primitive operator, the general structure of your application be the following:
+ 
  1) Convert form a TStream to an SPLStream
+ 
  2) Pass the SPLStream as input when invoking the primitive operator
+ 
  3) Convert the output SPLStream back to a TStream
  
  The application, in its entirety, is as follows:
