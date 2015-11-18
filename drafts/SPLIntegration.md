@@ -17,13 +17,13 @@ To begin, suppose that we have a 'myTk' toolkit in the home directory. In the 'm
 $ cd ~/
 $ tree
 |--  ./myTk
-|   |--  ./myTk/myPackageName
-|   |   |-- ./myTk/myPackageName/myOperatorName
-|   |   |   |-- <implementation of myOperatorName>
+|   |--  ./myTk/appendPackage
+|   |   |-- ./myTk/appendPackage/appendOperator
+|   |   |   |-- <implementation of appendOperator>
 |   |--  ./myTk/toolkit.xml
 ```
 
- As such, when the toolkit is included into the application, the full path of the operator will be **myPackageName::myOperatorName**. The 'myOperatorName' operator itself is very simple, it takes an SPL rstring, appends it with the string " appended!", and submits the resulting rstring as an output tuple. For example, if the input to the 'myOperatorName' operator are the following rstring tuples (one per line):
+ As such, when the toolkit is included into the application, the full path of the operator will be **appendPackage::appendOperator**. The 'appendOperator' operator itself is very simple, it takes an SPL rstring, appends it with the string " appended!", and submits the resulting rstring as an output tuple. For example, if the input to the 'appendOperator' operator are the following rstring tuples (one per line):
 ```
  Rhinoceros
  Modest Mouse
@@ -37,13 +37,15 @@ The output output tuples will be:
  The cake is a lie appended!
 ```
 
-It's important to note that every primitive operator is strongly typed with respect to the tuples that are sent to and emitted from the operator. As such, each primitive operator is associated with a *stream schema*, which simply contains the types of its input and output tuples. For example, the stream schema for both the input and output tuples of 'myOperatorName' would be:
+It's important to note that every primitive operator is strongly typed with respect to the tuples that are sent to and emitted from the operator. As such, each primitive operator is associated with a *stream schema*, which simply contains the types of its input and output tuples. For example, the stream schema for both the input and output tuples of 'appendOperator' would be:
 ```
 tuple<rstring attribute_name>
 ```
-Which makes sense, since 'myOperatorName' both takes and produces an rstring. A hypothetical operator that takes an rstring and an integer would look like:
+Which makes sense, since 'appendOperator' both takes and produces an rstring. A hypothetical operator that takes an rstring and an integer would look like:
 ```
 tuple<rstring first_attribute_name, uint32 second_attribute_name>
 ```
 
-You'll notice that each attribute of a tuple requires a corresponding name. This is because certain primitive operators require that an attribute have a particular name to operate correctly; however, the vast majority of operators shipped with IBM Streams are flexible and allow the usage of any name.
+You'll notice that each attribute of a tuple requires a corresponding name. This is because certain primitive operators require that an attribute have a particular name to operate correctly; however, the vast majority of operators shipped with IBM Streams are flexible and allow the usage of any name. 
+
+# Using the toolkit within the Java Application API
