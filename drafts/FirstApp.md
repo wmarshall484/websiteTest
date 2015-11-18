@@ -1,7 +1,7 @@
 # The Java Application API
 If you're viewing this page, it's likely that you haven't worked with the Java Application API before, or possibly streaming applications in general. In this document, we discuss at a high level the general principles behind streaming application development and the benefits of the Java Application API, and  we demonstrate these in a sample application. 
 
-The Java Application API allows you to write programs for streaming data exclusively in Java — no SPL! You can run the programs as Java programs, you can run them as stand-alone Streams applications, or you can run them as distributed Streams applications. If you need help getting your environment set up, visit [the Java Application API setup guide](Environment_Setup).
+The Java Application API allows you to write programs for streaming data exclusively in Java — no SPL! You can run the programs as Java programs, you can run them as stand-alone Streams applications, or you can run them as distributed Streams applications. If you need help getting your environment set up, visit [the Java Application API setup guide](https://github.com/wmarshall484/websiteTest/blob/master/drafts/Environment_Setup.md).
 
 The primary goals of the Java Application API are to enable the developer to:
 * Define the structure of a streaming application using only Java
@@ -17,7 +17,7 @@ Streaming applications are usually solutions that meet real-time data processing
 
 The application must be allowed to run for an indeterminate amount of time, and it also must be allowed to scale flexibly. Say, for example, that the number of temperature sensors doubles, so correspondingly the speed must double at which the application must process data. With the Java Application API, you can easily parallelize your data pipeline, and you can specify which pieces of the application run on which resources across a certain number of specified processes.
 
-The latter features will be covered in a [subsequent tutorial](UDP_Windowing). For now, let's take the simple example of reading data from a temperature sensor and printing the output to the screen. 
+The latter features will be covered in a [subsequent tutorial](https://github.com/wmarshall484/websiteTest/blob/master/drafts/UDP_Windowing.md). For now, let's take the simple example of reading data from a temperature sensor and printing the output to the screen. 
 
 ## My first application - step 1: Creating a topology object
 When writing an application with the Java Application API, the very first thing to do is to create the Topology object:
@@ -50,7 +50,7 @@ TStream<Double> readings = topology.endlessSource(() -> random.nextGaussian());
 
 The `endlessSource()`method produces a TStream, which is arguably the most important Java class in the Java Application API. 
 
-**A TStream represents a potentially infinite flow of tuples in your application**. Because an application might run forever, there is no upper limit to the number of tuples that can flow over a TStream. Tuples flow one at a time over a TStream and are processed by subsequent data **operations**. We do not define any data operations in this example (such as filtering or transforming the data on a TStream). Data operations are covered in the [common streams operations](CommonStreamOperations) tutorial.
+**A TStream represents a potentially infinite flow of tuples in your application**. Because an application might run forever, there is no upper limit to the number of tuples that can flow over a TStream. Tuples flow one at a time over a TStream and are processed by subsequent data **operations**. We do not define any data operations in this example (such as filtering or transforming the data on a TStream). Data operations are covered in the [common streams operations](https://github.com/wmarshall484/websiteTest/blob/master/CommonStreamOperations.md) tutorial.
 
 One of the strengths of the Java Application API is that a tuple can be any Java Object, so long as it is serializable. As such, a TStream is parameterized to a Java type as shown in this line:
 ```
@@ -64,7 +64,7 @@ Now, in true "Hello World" fashion, after obtaining the data we simply print it 
 ``` Java
 readings.print();
 ```
-Because each tuple is a Java object, invoking TStream's `print()`method calls the `toString()`method on each tuple and prints the results to output using `System.out.println()`. Although TStream's `print()`method is useful in its convenience, there are likely cases where the application will need to output to a file or Kafka. These cases are covered in the [Kafka](Kafka) and [common streams operations](CommonStreamOperations) tutorials.
+Because each tuple is a Java object, invoking TStream's `print()`method calls the `toString()`method on each tuple and prints the results to output using `System.out.println()`. Although TStream's `print()`method is useful in its convenience, there are likely cases where the application will need to output to a file or Kafka. These cases are covered in the [Kafka](https://github.com/wmarshall484/websiteTest/blob/master/drafts/Kafka.md) and [common streams operations](https://github.com/wmarshall484/websiteTest/blob/master/CommonStreamOperations.md) tutorials.
 
 ## My first application - step 5: Submitting and running the application
 After the application has been defined, it can be run by acquiring a *context* from the StreamsContextFactory, and invoking its `submit()`method while passing the topology object as a parameter:
