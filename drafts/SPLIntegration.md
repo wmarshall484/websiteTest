@@ -116,14 +116,15 @@ and submit:
 StreamsContextFactory.getStreamsContext("STANDALONE").submit(topology).get();
 ```
 
-When the application is run, it correctly produces the following output:
+When the application is run, it correctly produces the following output
 ```
  Rhinoceros appended!
  Modest Mouse appended!
  The cake is a lie appended!
  ```
+
+# To reiterate
  
- # To reiterate
  When using a primitive operator, the general structure of your application be the following:
  1) Convert form a TStream to an SPLStream
  2) Pass the SPLStream as input when invoking the primitive operator
@@ -131,7 +132,7 @@ When the application is run, it correctly produces the following output:
  
  The application, in its entirety, is as follows:
  ``` Java
- import java.io.File;
+import java.io.File;
 import java.util.HashMap;
 
 import com.ibm.streams.operator.OutputTuple;
