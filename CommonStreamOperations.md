@@ -199,4 +199,4 @@ Or, more concisely with Java 8 lambda expressions:
 TStream<String> strings = ...;
 strings.sing(string -> System.err.println(string));
 ```
-For a more in-depth tutorial on how to write a sink that writes to a file, visit the [file reading/writing](http://www.google.com) introduction. Or, for Kafka, the [digesting and ingesting with Kafka](www.google.com) tutorial should contain relevant information.
+For a more in-depth tutorial on how to write a sink that writes to a file, visit the [file reading/writing](https://github.com/wmarshall484/websiteTest/blob/master/drafts/FileReadWrite.md) introduction. Or, for Kafka, the [digesting and ingesting with Kafka](https://github.com/wmarshall484/websiteTest/blob/master/drafts/Kafka.md) tutorial should contain relevant information.
