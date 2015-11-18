@@ -46,6 +46,46 @@ Which makes sense, since 'appendOperator' both takes and produces an rstring. A 
 tuple<rstring first_attribute_name, uint32 second_attribute_name>
 ```
 
-You'll notice that each attribute of a tuple requires a corresponding name. This is because certain primitive operators require that an attribute have a particular name to operate correctly; however, the vast majority of operators shipped with IBM Streams are flexible and allow the usage of any name. 
+You'll notice that each attribute of a tuple requires a corresponding name. This is because certain primitive operators require that an attribute have a particular name to operate correctly; however, the vast majority of operators shipped with IBM Streams are flexible and allow the usage of any name.
+
+Defining stream schemas is not necessary when just developing exclusively withing the Java Application API -- it only becomes necessary with interfacing with primitive operators. We see why this is true in the next section.
 
 # Using the toolkit within the Java Application API
+In the introductory tutorials to the Java Application API, we created TStream objects which represented the flows of data in our application. To utilize a primitive operator, we must first convert our TStream to a special kind of stream called an SPLStream. SPLStreams are exactly like TStreams, except instead of being templated to a Java type, as in:
+```
+TStream<Double> myStream = ...;
+```
+
+Their types are defined by the *stream schemas* that were mentioned in the previous section, e.g.:
+```
+tuple<rstring attribute_name>
+```
+
+In addition, to create an SPLStream it's necessary to provide a transformation Function to convert from the types of the TStream's Java objects to the SPLStream's SPL types. To show this in action, let's suppose that we have a TStream of Java Strings that we want to run through the 'appendOperator' that is found in the 'myTk' toolkit:
+``` Java
+Topology topology = new Topology("primitiveOperatorTest");
+TStream<String> strings = topology.strings("Rhinoceros", "Modest Mouse", "The cake is a lie");
+```
+
+The first thing we do is import the toolkit by using the *addToolkit* utility method found in com.ibm.streamsx.topology.spl.SPL:
+``` Java
+SPL.addToolkit(topology, new File("/home/streamsadmin/myTk"));
+```
+
+Then, we convert the TStream of Strings to an SPLStream of SPL tuples -- each tuple corresponding to the stream schema of the operator:
+``` Java
+StreamSchema rstringSchema = Type.Factory.getStreamSchema("tuple<rstring rstring_attr_name>");
+SPLStream splInputStream = SPLStreams.convertStream(strings, new BiFunction<String, OutputTuple, OutputTuple>(){
+			@Override
+			public OutputTuple apply(String input_string, OutputTuple output_rstring) {
+				output_rstring.setString("rstring_attr_name", input_string);
+				return output_rstring;
+			}	
+		}, rstringSchema);
+```
+In the above lines of code, the convertStream method takes three parameters
+* **strings** - The TStream to convert to an SPL Stream
+* **A BiFunction** - The BiFunction may appear complicated, but its functionality is easy to understand. It takes two arguments
+  * It's first argument is a Java String. This is the current Java tuple on the TStream (e.g., "Rhinoceros") to be transformed to an SPL tuple. 
+  * Its second argument is an OutputTuple. An OutputTuple can be thought of as a wrapper for an SPL tuple. It contains methods such as *setString* or *setDouble* which take Java types (Strings, Doubles, etc.) and converts them to SPL types according to the provided schema. In the above code, we can see that the "rstring_attr_name" attribute is set by invoking ```output_rstring.setString("rstring_attr_name", input_string);```. After being modified, the OutputTuple is returned by the BiFunction.
+* **rstringSchema** - This is the stream schema for the input to the 'appendOperator' primitive operator. This determines the name used when calling *OutputTuple.setString*.
